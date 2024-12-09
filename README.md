@@ -29,6 +29,27 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Build Docker image
+
+Build Docker image
+
+```
+docker build --no-cache -t mauricewipf/playground-nextjs:latest -f container/Dockerfile .
+```
+
+Verify
+
+```
+docker images
+```
+
+Run the Docker Container
+
+```
+docker run --rm -p 3000:3000 mauricewipf/playground-nextjs:latest
+```
+
+
 ## Deployment with Helm
 
 Install with Helm
