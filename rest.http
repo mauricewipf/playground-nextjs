@@ -1,0 +1,8 @@
+### GET cats |localhost
+GET http://localhost:3000/api/cats
+
+### GET cat by :id |localhost
+GET http://localhost:3000/api/cats/647dafbd6f5c9969c3de545e
+
+### GET cats | DEV
+GET https://mauwi-playground.com/api/cats
