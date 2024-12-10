@@ -49,17 +49,32 @@ Run the Docker Container
 docker run --rm -p 3000:3000 mauricewipf/playground-nextjs:latest
 ```
 
+Push image
+
+```
+docker push mauricewipf/playground-nextjs:latest
+```
+
+Test pulling image
+
+```
+docker pull mauricewipf/playground-nextjs:latest
+```
 
 ## Deployment with Helm
 
 Install with Helm
 
 ```
-helm install -f ./container/k8s/values.yaml playground-nextjs ./container/k8s
+helm install playground-nextjs ./container/k8s -f ./container/k8s/values.yaml
 ```
 
 Update
 
 ```
-helm upgrade -f ./container/k8s/values.yaml playground-nextjs ./container/k8s
+helm upgrade playground-nextjs ./container/k8s -f ./container/k8s/values.yaml
+```
+
+```
+minikube service playground-nextjs --url
 ```
