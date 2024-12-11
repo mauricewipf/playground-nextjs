@@ -17,7 +17,17 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Production
-FROM node:20-slim AS runner
+FROM node:20-alpine AS runner
+
+RUN apk add --no-cache curl
+
+# Define build-time argument
+ARG API_ENDPOINT=SET_ON_BUILD_TIME
+
+# Set environment variable
+ENV API_ENDPOINT=${API_ENDPOINT}
+
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
 # Set the working directory
 WORKDIR /app

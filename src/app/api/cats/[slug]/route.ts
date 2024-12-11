@@ -8,10 +8,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
   let data: Pet | null;
 
   try {
-    const res = await fetch(`${process.env.ENDPOINT}/${slug}`)
+    const res = await fetch(`${process.env.API_ENDPOINT}/${slug}`)
     data = await res.json();
   } catch (e) {
-    console.error('Fetch error', e);
+    console.error('API Fetch error', e);
 
     data = null;
 

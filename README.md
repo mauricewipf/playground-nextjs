@@ -33,8 +33,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 Build Docker image
 
-```
-docker build --no-cache -t mauricewipf/playground-nextjs:latest -f container/Dockerfile .
+```sh
+docker build \
+    --no-cache \
+    -t mauricewipf/playground-nextjs:latest \
+    -f container/Dockerfile .
 ```
 
 Verify
@@ -46,7 +49,11 @@ docker images
 Run the Docker Container
 
 ```
-docker run --rm -p 3000:3000 mauricewipf/playground-nextjs:latest
+docker run \
+    --rm \
+    -p 3000:3000 \
+    -e API_ENDPOINT=https://mauwi-playground.com/api/cats \
+    mauricewipf/playground-nextjs:latest
 ```
 
 Push image

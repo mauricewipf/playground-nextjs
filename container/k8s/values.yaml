@@ -121,3 +121,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+env:
+  - name: API_ENDPOINT
+    value: "http://fullstack-app-service.default.svc.cluster.local:80/cats"

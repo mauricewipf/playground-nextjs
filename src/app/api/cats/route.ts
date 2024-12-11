@@ -6,10 +6,10 @@ export async function GET() {
   let data: Pet[];
 
   try {
-    const res = await fetch(process.env.ENDPOINT || '')
+    const res = await fetch(process.env.API_ENDPOINT || '')
     data = await res.json();
   } catch (e) {
-    console.error('Fetch error', e);
+    console.error('API Fetch error', e);
 
     data = [];
 
