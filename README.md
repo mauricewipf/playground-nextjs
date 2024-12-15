@@ -70,6 +70,18 @@ docker pull mauricewipf/playground-nextjs:latest
 
 ## Deployment with Helm
 
+Validate chart
+
+```
+helm lint ./container/k8s
+```
+
+See mapped Values on Deployment, Service and Ingress
+
+```
+helm template playground-nextjs ./container/k8s -f ./container/k8s/values.yaml
+```
+
 Install with Helm
 
 ```
