@@ -5,7 +5,9 @@ export default async function Page({params}: { params: Promise<{ slug: string }>
   let data: Pet | null = null;
 
   try {
-    const res = await fetch( `http://localhost:3000/api/cats/${id}`)
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cats/${id}`;
+    console.log('cats/[slug]/page.tsx url:', url);
+    const res = await fetch(url)
     data = await res.json();
   } catch (e) {
     console.error('Fetch error', e);
