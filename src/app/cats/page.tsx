@@ -13,8 +13,7 @@ export default async function Page() {
   let data: Pet[] = [];
 
   try {
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cats`;
-    console.log('cats/pages.tsx url', url);
+    const url = `${process.env.API_ENDPOINT}`;
     const res = await fetch(url);
     data = await res.json();
   } catch (e) {
@@ -23,7 +22,7 @@ export default async function Page() {
 
   return (
     <>
-      <h1>Cats Overview</h1>
+      <h1 className="font-black m-3">Cats Overview</h1>
       <Table data={data} />
     </>
   );

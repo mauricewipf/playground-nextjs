@@ -5,8 +5,7 @@ export default async function Page({params}: { params: Promise<{ slug: string }>
   let data: Pet | null = null;
 
   try {
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cats/${id}`;
-    console.log('cats/[slug]/page.tsx url:', url);
+    const url = `${process.env.API_ENDPOINT}/${id}`;
     const res = await fetch(url)
     data = await res.json();
   } catch (e) {
@@ -15,7 +14,7 @@ export default async function Page({params}: { params: Promise<{ slug: string }>
 
   return (
     <>
-      <h1>Cat Details</h1>
+      <h1 className="font-black m-3">Cat Details</h1>
 
       {data && <div>Name: {data.name}</div>}
     </>

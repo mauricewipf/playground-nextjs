@@ -1,6 +1,6 @@
-// export const revalidate = 60
-
 import {Pet} from "@/models/Pet";
+
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
   let data: Pet[];

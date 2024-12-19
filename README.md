@@ -7,10 +7,6 @@ First, run the development server:
 ```bash
 npm run dev
 # or
-yarn dev
-# or
-pnpm dev
-# or
 bun dev
 ```
 
@@ -32,67 +28,73 @@ npm run build
 
 Build Docker image
 
-```sh
+```shell
 docker build \
     --no-cache \
     -t mauricewipf/playground-nextjs:latest \
+    -t mauricewipf/playground-nextjs:$(git rev-parse --short HEAD) \
     -f container/Dockerfile .
 ```
 
 Verify
 
-```
+```shell
 docker images
 ```
 
 Run the Docker Container
 
-```
+```shell
 docker run \
     --rm \
     -p 3000:3000 \
     -e API_ENDPOINT=https://mauwi-playground.com/api/cats \
-    mauricewipf/playground-nextjs:latest
+    mauricewipf/playground-nextjs:$(git rev-parse --short HEAD)
 ```
 
 Push image
 
-```
-docker push mauricewipf/playground-nextjs:latest
+```shell
+docker push mauricewipf/playground-nextjs:$(git rev-parse --short HEAD)
 ```
 
 Test pulling image
 
-```
-docker pull mauricewipf/playground-nextjs:latest
+```shell
+docker pull mauricewipf/playground-nextjs:$(git rev-parse --short HEAD)
 ```
 
 ## Deployment with Helm
 
 Validate chart
 
-```
+```shell
 helm lint ./container/k8s
 ```
 
 See mapped Values on Deployment, Service and Ingress
 
-```
+```shell
 helm template playground-nextjs ./container/k8s -f ./container/k8s/values.yaml
 ```
 
 Install with Helm
 
-```
+```shell
 helm install playground-nextjs ./container/k8s -f ./container/k8s/values.yaml
 ```
 
 Update
 
-```
-helm upgrade playground-nextjs ./container/k8s -f ./container/k8s/values.yaml
+```shell
+helm upgrade playground-nextjs \
+  ./container/k8s \
+  -f ./container/k8s/values.yaml \
+  --set image.tag=$(git rev-parse --short HEAD)
 ```
 
-```
+Get service URL
+
+```shell
 minikube service playground-nextjs --url
 ```
