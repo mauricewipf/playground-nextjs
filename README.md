@@ -16,6 +16,24 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## MinIO Object Storage for Container
+
+[Docker (rootless)](https://min.io/docs/minio/container/index.html)
+
+```shell
+mkdir -p ${HOME}/minio/data
+
+docker run \
+   -p 9000:9000 \
+   -p 9001:9001 \
+   --user $(id -u):$(id -g) \
+   --name minio1 \
+   -e "MINIO_ROOT_USER=admin" \
+   -e "MINIO_ROOT_PASSWORD=admin123" \
+   -v ${HOME}/minio/data:/data \
+   quay.io/minio/minio server /data --console-address ":9001"
+```
+
 ## Build Application
 
 More on standalone builds: https://nextjs.org/docs/app/api-reference/config/next-config-js/output#automatically-copying-traced-files
@@ -32,7 +50,7 @@ Build Docker image
 docker build \
     --no-cache \
     -t mauricewipf/playground-nextjs:latest \
-    -t mauricewipf/playground-nextjs:$(git rev-parse --short HEAD) \
+    -t mauricewipf/playground-nextjs:v0.0.2 \
     -f container/Dockerfile .
 ```
 
@@ -49,19 +67,21 @@ docker run \
     --rm \
     -p 3000:3000 \
     -e API_ENDPOINT=https://mauwi-playground.com/api/cats \
-    mauricewipf/playground-nextjs:$(git rev-parse --short HEAD)
+    -e MINIO_ENDPOINT=localhost \
+    -e MINIO_PORT=9000 \
+    mauricewipf/playground-nextjs:v0.0.2
 ```
 
 Push image
 
 ```shell
-docker push mauricewipf/playground-nextjs:$(git rev-parse --short HEAD)
+docker push mauricewipf/playground-nextjs:v0.0.2
 ```
 
 Test pulling image
 
 ```shell
-docker pull mauricewipf/playground-nextjs:$(git rev-parse --short HEAD)
+docker pull mauricewipf/playground-nextjs:v0.0.2
 ```
 
 ## Deployment with Helm
@@ -90,7 +110,7 @@ Update
 helm upgrade playground-nextjs \
   ./container/k8s \
   -f ./container/k8s/values.yaml \
-  --set image.tag=$(git rev-parse --short HEAD)
+  --set image.tag=v0.0.2
 ```
 
 Get service URL

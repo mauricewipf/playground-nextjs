@@ -129,3 +129,7 @@ affinity: {}
 env:
   - name: API_ENDPOINT
     value: "http://fullstack-app-service.default.svc.cluster.local:80/cats"
+  - name: MINIO_ENDPOINT
+    value: "http://playground-minio.default.svc.cluster.local"
+  - name: MINIO_PORT
+    value: "9000"
