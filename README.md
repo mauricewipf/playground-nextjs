@@ -72,6 +72,18 @@ docker run \
     mauricewipf/playground-nextjs:v0.0.2
 ```
 
+Run MinIO Docker Container
+
+```shell
+docker run \
+    --rm \
+    -p 9000:9090 \
+    -e "MINIO_ROOT_USER=minioadmin" \
+    -e "MINIO_ROOT_PASSWORD=minioadmin" \
+    -v /Users/mauricewipf/minio/data:/data \
+    quay.io/minio/minio:latest server /data
+```
+
 Push image
 
 ```shell
@@ -117,4 +129,20 @@ Get service URL
 
 ```shell
 minikube service playground-nextjs --url
+```
+
+## Deployment of MinIO
+
+```shell
+helm install playground-minio ./k8s/playground-minio -f ./k8s/playground-minio/values.yaml
+```
+
+```shell
+helm upgrade playground-minio ./k8s/playground-minio -f ./k8s/playground-minio/values.yaml
+```
+
+Temporary port-forwarding
+
+```shell
+kubectl port-forward playground-minio-555d556d5d-7hgc4 9000 9090
 ```
