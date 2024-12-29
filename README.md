@@ -144,5 +144,6 @@ helm upgrade playground-minio ./k8s/playground-minio -f ./k8s/playground-minio/v
 Temporary port-forwarding
 
 ```shell
-kubectl port-forward playground-minio-555d556d5d-7hgc4 9000 9090
+# Find the pod name and forward port
+kubectl port-forward $(kubectl get pods | grep -E "^playground-minio-" | awk '{print $1}') 9090 9090
 ```
