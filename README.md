@@ -51,7 +51,7 @@ docker build \
     --no-cache \
     -t mauricewipf/playground-nextjs:latest \
     -t mauricewipf/playground-nextjs:v0.0.6 \
-    -f container/Dockerfile .
+    -f k8s/playground-nextjs/Dockerfile .
 ```
 
 Verify
@@ -103,27 +103,27 @@ docker pull mauricewipf/playground-nextjs:v0.0.6
 Validate chart
 
 ```shell
-helm lint ./container/k8s
+helm lint ./k8s/playground-nextjs
 ```
 
 See mapped Values on Deployment, Service and Ingress
 
 ```shell
-helm template playground-nextjs ./container/k8s -f ./container/k8s/values.yaml
+helm template playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-nextjs/values.yaml
 ```
 
 Install with Helm
 
 ```shell
-helm install playground-nextjs ./container/k8s -f ./container/k8s/values.yaml
+helm install playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-nextjs/values.yaml
 ```
 
 Update
 
 ```shell
 helm upgrade playground-nextjs \
-  ./container/k8s \
-  -f ./container/k8s/values.yaml \
+  ./k8s/playground-nextjs \
+  -f ./k8s/playground-nextjs/values.yaml \
   --set image.tag=v0.0.6
 ```
 
