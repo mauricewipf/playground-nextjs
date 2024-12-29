@@ -133,7 +133,7 @@ env:
   - name: MINIO_ENDPOINT
     value: "playground-minio.default.svc.cluster.local"
   - name: MINIO_PORT
-    value: "80"
+    value: "9000"
   - name: MINIO_ACCESS_KEY
     valueFrom:
       secretKeyRef:

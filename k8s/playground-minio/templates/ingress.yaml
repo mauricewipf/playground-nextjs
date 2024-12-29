@@ -37,7 +37,7 @@ spec:
               service:
                 name: {{ include "playground-minio.fullname" $ }}
                 port:
-                  number: {{ $.Values.service.port }}
+                  number: {{ $.Values.service.containerPort }}
           {{- end }}
     {{- end }}
 {{- end }}

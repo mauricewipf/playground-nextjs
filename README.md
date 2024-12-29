@@ -149,3 +149,7 @@ Temporary port-forwarding
 # Find the pod name and forward port
 kubectl port-forward $(kubectl get pods | grep -E "^playground-minio-" | awk '{print $1}') 9090 9090
 ```
+
+```shell
+minikube service playground-minio --url
+```
