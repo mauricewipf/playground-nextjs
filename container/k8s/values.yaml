@@ -135,6 +135,12 @@ env:
   - name: MINIO_PORT
     value: "80"
   - name: MINIO_ACCESS_KEY
-    value: "ugk7w1h6d9aK4S7zHdgz"
+    valueFrom:
+      secretKeyRef:
+        name: playground-minio-secret
+        key: MINIO_ACCESS_KEY
   - name: MINIO_SECRET_KEY
-    value: "wThq6gKMtthFBQ4vOjicLXJDUfPmPXE2Cb0i4rXn"
+    valueFrom:
+      secretKeyRef:
+        name: playground-minio-secret
+        key: MINIO_SECRET_KEY
