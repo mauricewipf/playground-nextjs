@@ -50,7 +50,7 @@ Build Docker image
 docker build \
     --no-cache \
     -t mauricewipf/playground-nextjs:latest \
-    -t mauricewipf/playground-nextjs:v0.0.2 \
+    -t mauricewipf/playground-nextjs:v0.0.6 \
     -f container/Dockerfile .
 ```
 
@@ -69,7 +69,9 @@ docker run \
     -e API_ENDPOINT=https://mauwi-playground.com/api/cats \
     -e MINIO_ENDPOINT=localhost \
     -e MINIO_PORT=9000 \
-    mauricewipf/playground-nextjs:v0.0.2
+    -e MINIO_ACCESS_KEY=ugk7w1h6d9aK4S7zHdgz \
+    -e MINIO_SECRET_KEY=wThq6gKMtthFBQ4vOjicLXJDUfPmPXE2Cb0i4rXn \
+    mauricewipf/playground-nextjs:v0.0.6
 ```
 
 Run MinIO Docker Container
@@ -87,13 +89,13 @@ docker run \
 Push image
 
 ```shell
-docker push mauricewipf/playground-nextjs:v0.0.2
+docker push mauricewipf/playground-nextjs:v0.0.6
 ```
 
 Test pulling image
 
 ```shell
-docker pull mauricewipf/playground-nextjs:v0.0.2
+docker pull mauricewipf/playground-nextjs:v0.0.6
 ```
 
 ## Deployment with Helm
@@ -122,7 +124,7 @@ Update
 helm upgrade playground-nextjs \
   ./container/k8s \
   -f ./container/k8s/values.yaml \
-  --set image.tag=v0.0.2
+  --set image.tag=v0.0.6
 ```
 
 Get service URL

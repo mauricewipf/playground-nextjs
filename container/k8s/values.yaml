@@ -55,6 +55,7 @@ service:
   type: ClusterIP
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
   port: 80
+  containerPort: 3000
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
@@ -130,6 +131,10 @@ env:
   - name: API_ENDPOINT
     value: "http://fullstack-app-service.default.svc.cluster.local:80/cats"
   - name: MINIO_ENDPOINT
-    value: "http://playground-minio.default.svc.cluster.local"
+    value: "playground-minio.default.svc.cluster.local"
   - name: MINIO_PORT
-    value: "9000"
+    value: "80"
+  - name: MINIO_ACCESS_KEY
+    value: "ugk7w1h6d9aK4S7zHdgz"
+  - name: MINIO_SECRET_KEY
+    value: "wThq6gKMtthFBQ4vOjicLXJDUfPmPXE2Cb0i4rXn"
