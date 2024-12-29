@@ -106,9 +106,9 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes:
-  - name: localvolume
+  - name: minio-data
     hostPath: # MinIO generally recommends using locally-attached volumes
-      path: /Users/mauricewipf/minio/data # Specify a path to a local drive or volume on the Kubernetes worker node
+      path: /minio/data # Specify a path to a local drive or volume on the Kubernetes worker node
       type: DirectoryOrCreate # The path to the last directory must exist
 # - name: foo
 #   secret:
@@ -118,7 +118,7 @@ volumes:
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
   - mountPath: /data
-    name: localvolume # Corresponds to the `spec.volumes` Persistent Volume
+    name: minio-data # Corresponds to the `spec.volumes` Persistent Volume
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
