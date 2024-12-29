@@ -141,5 +141,5 @@ env:
 
 secret:
   name: playground-minio-secret
-  MINIO_ACCESS_KEY: ugk7w1h6d9aK4S7zHdgz
-  MINIO_SECRET_KEY: wThq6gKMtthFBQ4vOjicLXJDUfPmPXE2Cb0i4rXn
+  MINIO_ACCESS_KEY: "SET_ON_INSTALL"
+  MINIO_SECRET_KEY: "SET_ON_INSTALL"

@@ -136,11 +136,29 @@ minikube service playground-nextjs --url
 ## Deployment of MinIO
 
 ```shell
-helm install playground-minio ./k8s/playground-minio -f ./k8s/playground-minio/values.yaml
+helm template playground-minio \
+  ./k8s/playground-minio \
+  -f ./k8s/playground-minio/values.yaml \
+  --set secret.MINIO_ACCESS_KEY=foo \
+  --set secret.MINIO_SECRET_KEY=bar
 ```
 
 ```shell
-helm upgrade playground-minio ./k8s/playground-minio -f ./k8s/playground-minio/values.yaml
+# Check .env.prod.yaml for values
+helm install playground-minio \
+  ./k8s/playground-minio \
+  -f ./k8s/playground-minio/values.yaml \
+  --set secret.MINIO_ACCESS_KEY=foo \
+  --set secret.MINIO_SECRET_KEY=bar
+```
+
+```shell
+# Check .env.prod.yaml for values
+helm upgrade playground-minio \
+  ./k8s/playground-minio \
+  -f ./k8s/playground-minio/values.yaml \
+  --set secret.MINIO_ACCESS_KEY=foo \
+  --set secret.MINIO_SECRET_KEY=bar
 ```
 
 Temporary port-forwarding
