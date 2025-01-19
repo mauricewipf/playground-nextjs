@@ -112,19 +112,10 @@ See mapped Values on Deployment, Service and Ingress
 helm template playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-nextjs/values.yaml
 ```
 
-Install with Helm
+Install or upgrade with Helm
 
 ```shell
-helm install playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-nextjs/values.yaml
-```
-
-Update
-
-```shell
-helm upgrade playground-nextjs \
-  ./k8s/playground-nextjs \
-  -f ./k8s/playground-nextjs/values.yaml \
-  --set image.tag=v0.0.6
+helm upgrade --install playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-nextjs/values.yaml --set image.tag=v0.0.6
 ```
 
 Get service URL
