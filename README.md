@@ -136,16 +136,7 @@ helm template playground-minio \
 
 ```shell
 # Check .env.prod.yaml for values
-helm install playground-minio \
-  ./k8s/playground-minio \
-  -f ./k8s/playground-minio/values.yaml \
-  --set secret.MINIO_ACCESS_KEY=foo \
-  --set secret.MINIO_SECRET_KEY=bar
-```
-
-```shell
-# Check .env.prod.yaml for values
-helm upgrade playground-minio \
+helm upgrade --install playground-minio \
   ./k8s/playground-minio \
   -f ./k8s/playground-minio/values.yaml \
   --set secret.MINIO_ACCESS_KEY=foo \
