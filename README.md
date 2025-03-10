@@ -69,8 +69,8 @@ docker run \
     -e API_ENDPOINT=https://mauwi-playground.com/api/cats \
     -e MINIO_ENDPOINT=localhost \
     -e MINIO_PORT=9000 \
-    -e MINIO_ACCESS_KEY=ugk7w1h6d9aK4S7zHdgz \
-    -e MINIO_SECRET_KEY=wThq6gKMtthFBQ4vOjicLXJDUfPmPXE2Cb0i4rXn \
+    -e MINIO_ACCESS_KEY=foo \
+    -e MINIO_SECRET_KEY=bar \
     mauricewipf/playground-nextjs:v0.0.6
 ```
 
