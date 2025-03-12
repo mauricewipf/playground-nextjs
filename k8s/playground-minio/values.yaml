@@ -138,8 +138,3 @@ env:
   - name: MINIO_BROWSER_LOGIN_ANIMATION
     # https://github.com/minio/console/issues/2539#issuecomment-1619211962
     value: "off"
-
-secret:
-  name: playground-minio-secret
-  MINIO_ACCESS_KEY: "SET_ON_INSTALL"
-  MINIO_SECRET_KEY: "SET_ON_INSTALL"

@@ -129,18 +129,26 @@ minikube service playground-nextjs --url
 ```shell
 helm template playground-minio \
   ./k8s/playground-minio \
-  -f ./k8s/playground-minio/values.yaml \
-  --set secret.MINIO_ACCESS_KEY=foo \
-  --set secret.MINIO_SECRET_KEY=bar
+  -f ./k8s/playground-minio/values.yaml
 ```
 
 ```shell
-# Check .env.prod.yaml for values
 helm upgrade --install playground-minio \
   ./k8s/playground-minio \
-  -f ./k8s/playground-minio/values.yaml \
-  --set secret.MINIO_ACCESS_KEY=foo \
-  --set secret.MINIO_SECRET_KEY=bar
+  -f ./k8s/playground-minio/values.yaml
+```
+
+## Create or update secret
+
+Create or get secret from http://minio.mauwi-playground.com/access-keys
+
+```shell
+kubectl delete secret playground-minio-secret
+
+# Check .env.prod.yaml for values
+kubectl create secret generic playground-minio-secret \
+--from-literal=MINIO_ACCESS_KEY="SET_ON_INSTALL" \
+--from-literal=MINIO_SECRET_KEY="SET_ON_INSTALL"
 ```
 
 Temporary port-forwarding
