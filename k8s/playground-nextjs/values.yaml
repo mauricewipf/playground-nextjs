@@ -142,3 +142,13 @@ env:
       secretKeyRef:
         name: playground-minio-secret
         key: MINIO_SECRET_KEY
+  - name: MONGODB_URI
+    valueFrom:
+      secretKeyRef:
+        name: mongodb-uri-prod
+        key: MONGODB_URI
+  - name: SESSION_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: playground-nextjs-session-secret
+        key: SESSION_SECRET

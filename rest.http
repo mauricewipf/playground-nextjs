@@ -1,8 +1,39 @@
-### GET cats |localhost
+### GET cats | localhost
 GET http://localhost:3000/api/cats
 
-### GET cat by :id |localhost
+### GET cat by :id | localhost
 GET http://localhost:3000/api/cats/647dafbd6f5c9969c3de545e
 
 ### GET cats | DEV
 GET https://mauwi-playground.com/api/cats
+
+### Create user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "User C",
+  "email": "user-c@user.com",
+  "password": "user",
+  "roles": ["user"]
+}
+
+### Login
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "foo@bar.com",
+  "password": "admin"
+}
+
+> {%
+ client.global.set("sessionToken", response.body.sessionToken);
+%}
+
+### Get users
+GET http://localhost:3000/api/users
+Cookie: playground-nextjs-session={{sessionToken}}
+
+### Logout
+GET http://localhost:3000/api/logout

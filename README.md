@@ -50,7 +50,7 @@ Build Docker image
 docker build \
     --no-cache \
     -t mauricewipf/playground-nextjs:latest \
-    -t mauricewipf/playground-nextjs:v0.0.6 \
+    -t mauricewipf/playground-nextjs:v0.0.8 \
     -f k8s/playground-nextjs/Dockerfile .
 ```
 
@@ -66,12 +66,8 @@ Run the Docker Container
 docker run \
     --rm \
     -p 3000:3000 \
-    -e API_ENDPOINT=https://mauwi-playground.com/api/cats \
-    -e MINIO_ENDPOINT=localhost \
-    -e MINIO_PORT=9000 \
-    -e MINIO_ACCESS_KEY=foo \
-    -e MINIO_SECRET_KEY=bar \
-    mauricewipf/playground-nextjs:v0.0.6
+    --env-file .env \
+    mauricewipf/playground-nextjs:v0.0.8
 ```
 
 Run MinIO Docker Container
@@ -89,13 +85,13 @@ docker run \
 Push image
 
 ```shell
-docker push mauricewipf/playground-nextjs:v0.0.6
+docker push mauricewipf/playground-nextjs:v0.0.8
 ```
 
 Test pulling image
 
 ```shell
-docker pull mauricewipf/playground-nextjs:v0.0.6
+docker pull mauricewipf/playground-nextjs:v0.0.8
 ```
 
 ## Deployment with Helm
@@ -115,7 +111,7 @@ helm template playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-next
 Install or upgrade with Helm
 
 ```shell
-helm upgrade --install playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-nextjs/values.yaml --set image.tag=v0.0.6
+helm upgrade --install playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-nextjs/values.yaml --set image.tag=v0.0.8
 ```
 
 Get service URL

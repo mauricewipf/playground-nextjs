@@ -27,31 +27,25 @@ RUN npm run build
 # Production image, copy all the files and run next
 FROM base AS runner
 
-ENV NODE_ENV=production
-
 RUN apk add --no-cache curl
 
 # Define build-time argument
-ARG API_ENDPOINT=SET_ON_BUILD_TIME
-ARG MINIO_ENDPOINT=SET_ON_BUILD_TIME
-ARG MINIO_PORT=SET_ON_BUILD_TIME
-ARG MINIO_ACCESS_KEY=SET_ON_BUILD_TIME
-ARG MINIO_SECRET_KEY=SET_ON_BUILD_TIME
+ARG API_ENDPOINT
+ARG MINIO_ENDPOINT
+ARG MINIO_PORT
+ARG MINIO_ACCESS_KEY
+ARG MINIO_SECRET_KEY
+ARG MONGODB_URI
+ARG SESSION_SECRET
 
 # Set environment variable
-ENV API_ENDPOINT=${API_ENDPOINT}
-ENV MINIO_ENDPOINT=${MINIO_ENDPOINT}
-ENV MINIO_PORT=${MINIO_PORT}
-ENV MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
-ENV MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
-
+ENV NODE_ENV=production
 ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 
 # Set the working directory
 WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs; adduser --system --uid 1001 nextjs
 
 # Copy the built application and public files
 COPY --from=builder /app/public ./public
