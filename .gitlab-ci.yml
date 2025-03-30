@@ -1,0 +1,45 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  IMAGE_NAME: "docker.io/mauricewipf/playground-nextjs"
+  IMAGE_TAG: "v0.0.8"
+
+build:
+  stage: build
+  image: docker:latest
+  script:
+    - docker build --no-cache -t $IMAGE_NAME:$IMAGE_TAG -t $IMAGE_NAME:latest -f k8s/playground-nextjs/Dockererfile .
+    - echo $CI_REGISTRY
+    - echo $CI_REGISTRY_USER
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u "$CI_REGISTRY_USER" --password-stdin
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+
+test:
+  stage: test
+  script:
+    - docker pull $IMAGE_NAME:$IMAGE_TAG
+    - docker run --rm $IMAGE_NAME:$IMAGE_TAG /bin/sh -c "echo 'Running tests...'"
+
+deploy:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.32.2
+    entrypoint: [""]
+  variables:
+    KUBECONFIG: /root/.kube/config
+    KUBECONFIG_CI: ./.kubeconfig-ci
+  script:
+    - cp $KUBECONFIG $KUBECONFIG_CI
+#    - export KUBE_SERVER=$(kubectl config view --minify | grep 'server: ' | awk '{print $2}')
+#    - echo "KUBE_SERVER: $KUBE_SERVER"
+    - sed -i 's|/Users/mauricewipf/.minikube|/root/.minikube|g' $KUBECONFIG_CI
+    - sed -i 's|https://127.0.0.1:54098|https://192.168.49.2:8443|g' $KUBECONFIG_CI
+    - helm version
+    - export KUBECONFIG=$KUBECONFIG_CI
+    - kubectl config use-context minikube
+    - kubectl config current-context
+    - kubectl cluster-info
+    - helm upgrade --install playground-nextjs ./k8s/playground-nextjs -f ./k8s/playground-nextjs/values.yaml --set image.tag=$IMAGE_TAG
