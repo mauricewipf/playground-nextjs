@@ -34,8 +34,8 @@ deploy:
   script:
     - cp $KUBECONFIG $KUBECONFIG_CI
     - export KUBE_SERVER=$(kubectl config view --minify | grep 'server:' | awk '{print $2}')
-    - sed -i 's|/Users/mauricewipf/.minikube|/root/.minikube|g' $KUBECONFIG_CI
-    - sed -i 's|$KUBE_SERVER|https://192.168.49.2:8443|g' $KUBECONFIG_CI
+    - sed -i "s|/Users/mauricewipf/.minikube|/root/.minikube|g" $KUBECONFIG_CI
+    - sed -i "s|$KUBE_SERVER|https://192.168.49.2:8443|g" $KUBECONFIG_CI
     - helm version
     - export KUBECONFIG=$KUBECONFIG_CI
     - kubectl config use-context minikube
