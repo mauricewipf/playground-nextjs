@@ -9,7 +9,7 @@ variables:
 
 build:
   stage: build
-  image: docker:latest
+  image: node
   script:
     - npm -v
     - node -v
