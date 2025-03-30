@@ -9,10 +9,8 @@ variables:
 
 build:
   stage: build
-  image: node
+  image: docker:latest
   script:
-    - npm -v
-    - node -v
     - docker build --no-cache -t $IMAGE_NAME:$IMAGE_TAG -t $IMAGE_NAME:latest -f k8s/playground-nextjs/Dockerfile .
     - echo $CI_REGISTRY
     - echo $CI_REGISTRY_USER

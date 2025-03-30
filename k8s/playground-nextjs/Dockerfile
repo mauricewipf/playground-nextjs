@@ -2,6 +2,7 @@
 
 # Stage 1: Build
 FROM node:18-alpine AS base
+RUN npm -v
 
 # Install dependencies only when needed
 FROM base AS deps
